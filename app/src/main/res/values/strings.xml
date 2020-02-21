@@ -1,0 +1,5 @@
+<resources>
+	<string name="app_name">ACME Advisor</string>
+	<string name="loading">Loading</string>
+	<string name="sukavi">S.Ukavi</string>
+</resources>

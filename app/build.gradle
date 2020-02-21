@@ -1,0 +1,111 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId 'com.angazadesign.sukavi'
+        minSdkVersion 14
+        targetSdkVersion 28
+        multiDexEnabled true
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testApplicationId 'com.angazadesign.sukavi.build.test'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    signingConfigs {
+        config {
+            keyAlias 'key0'
+            keyPassword 'Qwerty!@#$%'
+            storeFile rootProject.file('signing/key.jks')
+            storePassword 'Qwerty!@#$%'
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.config
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false
+            jniDebuggable false
+            renderscriptDebuggable false
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+        }
+        debug {
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            debuggable true
+            jniDebuggable true
+            renderscriptDebuggable true
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+        }
+    }
+    flavorDimensions defaultConfig.versionName
+    productFlavors {
+        demo {
+            applicationId 'com.angazadesign.sukavi'
+            minSdkVersion 14
+            targetSdkVersion 28
+            multiDexEnabled true
+            versionCode defaultConfig.versionCode
+            versionName defaultConfig.versionName
+            testInstrumentationRunner defaultConfig.testInstrumentationRunner
+            testApplicationId defaultConfig.applicationId
+            dimension defaultConfig.versionName
+            applicationIdSuffix ".demo"
+            versionNameSuffix '-demo'
+        }
+
+        endProduct {
+            applicationId 'com.angazadesign.sukavi'
+            minSdkVersion 14
+            targetSdkVersion 28
+            multiDexEnabled true
+            versionCode defaultConfig.versionCode
+            versionName defaultConfig.versionName
+            testInstrumentationRunner defaultConfig.testInstrumentationRunner
+            testApplicationId defaultConfig.applicationId
+            dimension defaultConfig.versionName
+            applicationIdSuffix ".endproject"
+            versionNameSuffix '-endproject'
+        }
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def project = "acme-advisor"
+            def SEP = "-"
+            def flavor = variant.productFlavors[0].name
+            def buildType = variant.variantData.variantConfiguration.buildType.name
+            def version = variant.versionName
+            def date = new Date()
+            def formattedDate = date.format('yyyy-MM-dd-HH-mm')
+            def newApkName = project + SEP + flavor + SEP + buildType + SEP + version + SEP + formattedDate + ".apk"
+            outputFileName = new File(newApkName)
+        }
+    }
+}
+
+dependencies {
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:3.14.0'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.android.support:recyclerview-v7:28.1.1'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.squareup.retrofit2:retrofit:2.0.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.0.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.14.0'
+    implementation 'com.wang.avi:library:2.1.3'
+    implementation 'com.github.sammyukavi:floating-action-button:v1.6.4'
+    implementation 'org.hamcrest:hamcrest-all:1.3'
+}

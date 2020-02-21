@@ -1,0 +1,25 @@
+<resources>
+	
+	<style name="AppTheme" parent="Theme.AppCompat">
+		<item name="colorPrimary">@color/primary</item>
+		<item name="colorPrimaryDark">@color/primary_dark</item>
+		<item name="colorAccent">@color/accent</item>
+		<item name="android:textColor">@color/black</item>
+	</style>
+	
+	<style name="AppTheme.NoActionBar">
+		<item name="windowActionBar">false</item>
+		<item name="windowNoTitle">true</item>
+	</style>
+	
+	<style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+	<style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+	
+	<style name="LoadingIndicatorView">
+		<item name="android:background">@android:color/transparent</item>
+		<item name="indicatorColor">#703735</item>
+		<item name="indicatorName">BallClipRotateMultipleIndicator</item>
+		<item name="android:indeterminate">true</item>
+	</style>
+
+</resources>
